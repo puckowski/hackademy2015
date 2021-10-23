@@ -1,0 +1,306 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Agent Training Program -- The Equation Group</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <!--<link rel="stylesheet" href="css/normalize.css">-->
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="js/jquery.min.js"></script>
+
+        <!----font-Awesome----->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <!----font-Awesome----->
+
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
+        <!-- Custom Theme files -->
+        <link href="css/theme-style.css" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script>
+            $(document).ready(function() {
+                onloadFunction();
+            });
+
+            function onloadFunction() {
+                //$( "#splashscreen" ).delay( 3500 ).fadeOut( 1500 );
+                console.log("onLoad() func call");
+
+                $("#splashscreen").height($(document).height());
+                $("#splashimage").height($(window).height());
+
+                var splashedCookie = checkGenericCookie("splashed");
+
+                if(splashedCookie == "" || splashedCookie == "false") {
+                    $( "#splashscreen" ).delay( 3500 ).fadeOut( 1500 );
+                    setGenericCookie("splashed", "true", 12);
+                } else {
+                    //No splash on reload
+                    console.log("already splashed");
+                    $( "#splashscreen").hide();
+                }
+
+                if (validateAllLessons() == true) {
+                    //alert("All lessons complete");
+                    console.log("all lessons complete");
+
+                    displayGenericDialog("certificateDialog");
+                } else {
+                    //alert("Not all lessons complete");
+                    console.log("not all lessons completed");
+
+                }
+
+                //displayGenericDialog("certificateDialog");
+            }
+
+            /* Fake "reload" page for asthetic purposes only... */
+            function reloadPage() {
+                console.log("reloadPage() func call");
+
+                $( "#splashscreen" ).fadeIn( 1500 );
+                $( "#splashscreen" ).delay( 3500 ).fadeOut( 1500 );
+            }
+
+            function printCertificate(divId) {
+                console.log("printing certificate comprised of div " + divId);
+
+                printDivCSS = new String ('<link href="myprintstyle.css" rel="stylesheet" type="text/css">')
+
+                window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+                window.frames["print_frame"].window.focus();
+                window.frames["print_frame"].window.print();
+            }
+
+            function validateAllLessons() {
+                console.log("validateAllLessons() func call");
+
+                var allValidated = true;
+
+                if(checkGenericCookie("exponentLesson") != 'true') {
+                    allValidated = false;
+                } else if(checkGenericCookie("divisionLesson") != 'true') {
+                    allValidated = false;
+                } else if(checkGenericCookie("exponentLesson") != 'true') {
+                    allValidated = false;
+                } else if(checkGenericCookie("moduloLesson") != 'true') {
+                    allValidated = false;
+                } else if(checkGenericCookie("multiplicationLesson") != 'true') {
+                    allValidated = false;
+                } else if(checkGenericCookie("pemdasLesson") != 'true') {
+                    allValidated = false;
+                }
+
+                return allValidated;
+            }
+
+            function setGenericCookie(cname,cvalue,exdays) {
+                console.log("setting cookie " + cname + " with value " + cvalue + " for " + exdays + " days");
+
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                var expires = "expires=" + d.toGMTString();
+                document.cookie = cname+"="+cvalue+"; "+expires;
+            }
+
+            function getGenericCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            function checkGenericCookie(cname) {
+                console.log("checking cookie " + cname);
+
+                var c=getGenericCookie(cname);
+
+                if (c != "") {
+                    return c;
+                } else {
+                    return "";
+                }
+            }
+
+            function displayGenericDialog(divId) {
+                console.log("displaying dialog comprised of div " + divId);
+
+                $( "#" + divId ).dialog({
+                    autoOpen: false
+                });
+
+                $("#" + divId).dialog('open');
+            }
+
+            function printCertificate() {
+                console.log("printCertificate() func call");
+
+                var html = "<html><head>" +
+                    "</head>" +
+                    "<body  style ='-webkit-print-color-adjust:exact;'>"+
+                    "<img src=\"img/Certificate of Achievement.png\" onload=\"javascript:window.print();\"/>" +
+                    "</body>";
+                var win = window.open("about:blank","_blank");
+
+                win.document.write(html);
+            }
+        </script>
+
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+        <!--
+        <script>
+            $(function () {
+                $( "#dialog" ).dialog({
+                    autoOpen: false
+                });
+
+                $("#opener").click(function() {
+                    $("#dialog").dialog('open');
+                });
+            });
+        </script>
+        -->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.1.4.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>-->
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!--
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+        -->
+
+        <!---- start-work---->
+        <div class="work">
+            <div class="container">
+                <div class="head text-center work-head">
+                    <div><a onclick="javascript:reloadPage()"><span> </span></a><h3 onclick="javascript:reloadPage()">Agent Training Web Portal</h3><h1>by The Equation Group</h1></div>
+                    <p>Welcome to the Equation Group's Agent Training Program! Complete all of the missions to become
+                    a certified agent.</p>
+                </div>
+                <!---- start-work-grids----->
+                <div class="work-grids">
+
+                    <div class="col-md-4 work-grid">
+                        <a href="lessonaddition.html"><span class="col-md-5 w-icon"> <i class="fa fa-plus-square-o"> </i></span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 0: Addition</h4>
+                            <p>Agent, you can not go anywhere without knowing the basics first. Demonstrate your
+                            proficiency in addition.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 work-grid center-work-grid">
+                        <a href="lessonsubtraction.html"><span class="col-md-5 w-icon"> <i class="fa fa-minus-square-o"> </i></span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 1: Subtraction</h4>
+                            <p>Time to prove that you are a master of subtraction. Be careful, do not make
+                            any silly mistakes!</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 work-grid">
+                        <a href="lessonmultiply.html"><span class="col-md-5 w-icon"><i class="fa fa-dot-circle-o"></i></span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 2: Multiplication</h4>
+                            <p>Time for a harder one: multiplication. Can you multiply numbers quickly and accurately?</p>
+                        </div>
+                    </div>
+
+                    <!-- -->
+                    <div class="col-md-4 work-grid">
+                        <a href="lessondiv.html"><span class="col-md-5 w-icon"> <i class="fa fa-crop"> </i></span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 3: Division</h4>
+                            <p>Time to divide and conquer! Prove that you are an expert in division.</p>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"> </div>
+
+                    <div class="col-md-4 work-grid center-work-grid">
+                        <a href="lessonexp.html"><span class="col-md-5 w-icon"> <i class="fa fa-unlock-alt"> </i></span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 6: Exponents</h4>
+                            <p>Exponents build upon the multiplication mission. Are you sure you are up for the challenge?</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 work-grid">
+                        <a href="lessonpemdas.html"><span class="col-md-5 w-icon"><i class="fa fa-gears"> </i> </span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 5: PEMDAS</h4>
+                            <p>Agents must be prepared for anything. Are you confident about your knowledge of the order of operations?</p>
+                        </div>
+                    </div>
+
+                    <!-- Go to board 2! -->
+                    <div class="col-md-4 work-grid">
+                        <a href="lessonmod.html"><span class="col-md-5 w-icon"><i class="fa fa-filter"> </i> </span></a>
+                        <div class="col-md-7 work-info">
+                            <h4>Mission 4: Modulo</h4>
+                            <p>Here is one you may not have heard of or know how to handle. Click to start mastering modulo.</p>
+                        </div>
+                    </div>
+                    <!-- Done going to board 2! -->
+
+                    <!-- -->
+                </div>
+                <!---- //End-work-grids----->
+            </div>
+        </div>
+        <!---- //End-work---->
+
+        <div id="certificateDialog" title="Training Program Completed!" hidden="hidden">
+            <p align="center">Congratulations, Agent! You have completed the Equation Group's Agent Training Program.
+                Click on the button below to see your Certificate of Achievement, print it out, write your name,
+                and have your teacher sign it.
+            <br>
+            <br>
+            <button onclick="printCertificate()">Print Certificate</button>
+            </p>
+        </div>
+
+        <!-- Splash screen div -->
+        <div id="splashscreen">
+            <img id="splashimage" src="https://s-media-cache-ak0.pinimg.com/originals/3d/80/64/3d8064758e54ec662e076b6ca54aa90e.jpg" />
+        </div>
+        <!-- End splash screen div -->
+
+        <a class="hiddenOnHome" onclick="displayGenericDialog('certificateDialog')">Print Certificate</a>
+    </body>
+</html>

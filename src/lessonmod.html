@@ -1,0 +1,399 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Agent Training Program -- Mission 4: Modulo Division</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/jquery.scrollzer.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-wide.css" />
+    </noscript>
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+    <script>
+        var question1Correct = false;
+        var question2Correct = false;
+        var question3Correct = false;
+        var overallStatus = false;
+
+        function validateQuestion1() {
+            var inputText = document.getElementById("t12").value;
+
+            if(inputText == "0") {
+                question1Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+        function displayGenericDialog(divId) {
+            console.log("displaying dialog comprised of div " + divId);
+
+            $( "#" + divId ).dialog({
+                autoOpen: false
+            });
+
+            $("#" + divId).dialog('open');
+        }
+
+        function validateQuestion2() {
+            var inputText = document.getElementById("t13").value;
+
+            if(inputText == "2") {
+                question2Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+
+        function validateQuestion3() {
+            var inputText = document.getElementById("t14").value;
+
+            if(inputText == "4") {
+                question3Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+
+        function validateAllQuestions() {
+            overallStatus = (question1Correct && question2Correct && question3Correct)
+            if(overallStatus){
+                /*setGenericCookie("moduloLesson", "true", 12);
+
+                displayGenericDialog("allCorrectDialog");
+                //alert("All questions have been answered correctly!");
+
+                setTimeout(
+                    function()
+                    {
+                        //do something special
+                        $(location).attr('href',"index.html");
+                    }, 2500);*/
+            } else {
+                //Not all questions in lesson answered correctly yet!
+            }
+        }
+
+        function setGenericCookie(cookieName, cookieValue, expirationDays){
+            var date = new Date();
+            date.setTime(date.getTime() +(expirationDays * 24 * 60 * 60 * 1000));
+            var expires = "expires" + date.toUTCString();
+            document.cookie = cookieName + "=" + cookieValue + "; " + expires;
+        }
+
+        function riddleSolution() {
+            if(overallStatus == true)
+            {
+                //alert("What am I?\nI am the Ace!");
+                displayGenericDialog("riddleDialog");
+
+                setTimeout(
+                    function()
+                    {
+                        //do something special
+                        $(location).attr('href',"index.html");
+                    }, 2500);
+            } else {
+                displayGenericDialog("riddleDialogIncomplete");
+            }
+        }
+
+    </script>
+
+
+
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="skel-layers-fixed">
+
+    <div class="top">
+
+        <!-- Logo/header icon -->
+        <!--<div id="logo">
+            <span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+            <h1 id="title">Small icon for header</h1>
+            <p>Short test for header icon.image</p>
+        </div>-->
+
+        <!-- Nav -->
+        <nav id="nav">
+            <!--
+                1. Hash link (scrolls to a different section within the page)
+                   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
+
+                2. Standard link (sends the user to another page/site)
+                   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
+            -->
+            <ul>
+                <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-trophy">Mission 4:</span></a></li>
+                <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-lock">Intel Report 1</span></a></li>
+
+                <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-briefcase">Challenge</span></a></li>
+
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="bottom">
+
+        <!--
+        <!-- Social Icons
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+            <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        -->
+
+        <p align="center">
+            <a href="index.html" class="button scrolly">Back to home</a>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Intro -->
+    <section id="top" class="one dark cover">
+        <div class="container">
+
+            <header>
+                <h2 class="alt">Mission 4:</h2>
+                <p> In this section you will learn about modulo division!<br />
+                </p>
+            </header>
+
+            <footer>
+                <a href="#portfolio" class="button scrolly">Let's Get Started!</a>
+            </footer>
+
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="two">
+        <br class="container">
+
+        <header>
+            <h2>Intel Report 1: What is Modulo Division?</h2>
+        </header>
+
+        This section is a continuation of the previous Lesson (Division) more specifically division with remainders.
+        This is basically a remainder. You will need to understand multiplication and division. The concept of modulo math
+        is that if there isn’t a remainder then your answer is 0. If the divisor doesn’t go into the dividend evenly then
+        the remainder is your answer. <br>
+
+        (Note: The picture below should help with understanding modulo division.) <br>
+
+        <br>
+        <!--Include multiplication.png file here -->
+
+
+            <img class="center" src="img/modulo.png" alt="" style = "width:504px;height:500px"/> <br>
+
+        Below are some examples: <br>
+
+        <strong>Example 1.</strong> <br>
+        12 &divide; 4 = 3, which means the remainder is 0, <br>
+        therefore, 12 mod 4 = 0. <br>
+        12 = 4 x 3 + 0. <br>
+
+        <br>
+
+        <strong>Example 2.</strong> <br>
+
+        11 &divide; 2 = 4 with a remainder of 3, <br>
+        therefore, 11 mod 2 = 3. <br>
+        11 = 2 x 4 + 3 <br>
+
+        <br>
+
+        Note: Another symbol for mod is the percent sign %. <br>
+        Therefore, 12 mod 5 and 12 % 5 mean the same thing.
+
+    </section>
+        <!-- Section 2
+
+
+
+    <section id="about" class="three">
+        <div class="container">
+
+            <header>
+                <h2>Section 2: Division with Remainders</h2>
+            </header>
+
+            Although there are numbers that divide nicely, there are also numbers that do not get divided evenly.
+            These numbers are left with what is called a remainder. See the example below to see how remainders work. <br>
+            <br>
+
+            <strong>Example 3.</strong> <br>
+
+            20 &divide; 3 = 6 with a remainder of 2 <br>
+            <br>
+            In this example, 3 (the divisor) only goes in evenly to 20 (the dividend) 6 times. After that you only have 2 left to reach 20, so
+            the remainder for this problem is 2. <br>
+
+            <br>
+
+
+            <strong>Example 4. </strong> <br>
+            <br>
+            50 &divide; 12 = 4 with a remainder of 2 <br>
+            This is saying that 12 can only go into 50 four times, and on the fifth time there is only 2 remaining. Therefore, the remainder is 2.
+
+
+
+
+
+
+
+
+
+        </div>
+    </section>
+
+    -->
+
+    <!-- Practice Problems -->
+    <section id="contact" class="four">
+        <div class="container">
+
+            <header>
+                <h2>Challenge</h2>
+            </header>
+
+            <p>Here are some problems that you can try on your own!</p>
+
+            <!--form method="post" action="#"-->
+
+
+                <p><b>TASK 1:&nbsp;</b>Please solve the modulo division problems and enter in the <b>remainder</b> in the box below. Then check your answers.</p>
+                <!-- -->
+                <div id="example">
+                    <table class="center" style="width:50%">
+                        <tr id="t11">
+                            <td>(1)</td>
+                            <td> 120 % 12 = </td>
+                            <td><input id="t12" type="text" maxlength="2" size="2" class="smallerTextBox"></td>
+                            <td><input onclick="javascript:validateQuestion1()" type="submit" value="Check" class="smallerInput"></td>
+                        </tr>
+                            <td>(2)</td>
+                            <td> 51 % 7 = </td>
+                            <td><input id="t13" type="text" maxlength="2" size="2" class="smallerTextBox"></td>
+                            <td><input onclick="javascript:validateQuestion2()" type="submit" value="Check" class="smallerInput"></td>
+                        <tr>
+                            <td>(3)</td>
+                            <td> 67 % 9  = </td>
+                            <td><input id="t14" type="text" maxlength="2" size="2" class="smallerTextBox"></td>
+                            <td><input onclick="javascript:validateQuestion3()" type="submit" value="Check" class="smallerInput"></td>
+                        </tr>
+                    </table>
+
+                    <!--solution-->
+                        <b>TASK 2:&nbsp;</b>To solve the riddle, use the letter-number table to match each answer to a letter!<br><br>
+                        <img src="img/letterNumTable.png" alt="" width ="75%"/><br><br>
+                        <b>Kings and queen may cling to power, and the jesters may have their call.
+                        I am the most common but I can rule them all. What am I?</b> <br>
+
+                        <input type="text" maxlength="1" size="2" class="smallerTextBox">
+                        <input type="text" maxlength="1" size="2" class="smallerTextBox">
+                        <input type="text" maxlength="1" size="2" class="smallerTextBox">
+                        &nbsp; &nbsp; &nbsp;
+
+                        <input onclick="javascript:riddleSolution()" type="submit" value="Check" class="smallerInput">
+
+                    </p>
+
+                </div>
+
+            <!--/form-->
+
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<div id="footer">
+
+    <!-- Copyright -->
+    <ul class="copyright">
+        <li>&copy; The Equation Group || Dyn Hackademy 2015. || All rights reserved.</li>
+    </ul>
+
+</div>
+
+<div id="correctDialog" title="Correct!" hidden="hidden">
+    <p align="center">Great work!
+    </p>
+</div>
+
+<div id="incorrectDialog" title="Incorrect" hidden="hidden">
+    <p align="center">Try again!
+    </p>
+</div>
+
+<div id="allCorrectDialog" title="All Correct!" hidden="hidden">
+    <p align="center">All questions have been answered successfully! Redirecting...
+    </p>
+</div>
+
+<div id="riddleDialog" title="Riddle Answer" hidden="hidden">
+    <p align="center">What am I? I am the Ace!
+        All questions have been answered successfully! Redirecting...</p>
+</div>
+
+<div id="riddleDialogIncomplete" title="Riddle Answer" hidden="hidden">
+    <p align="center">Something is still not quite right with the riddle! Keep trying!</p>
+</div>
+
+</body>
+</html>
+
+
+

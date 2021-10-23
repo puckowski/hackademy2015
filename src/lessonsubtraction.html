@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Agent Training Program -- Mission 1: Subtraction</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/jquery.scrollzer.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-wide.css" />
+    </noscript>
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+    <script>
+        var questionCorrect = false;
+        var overallStatus = false;
+        var c1 = false;
+        var c2 = false;
+        var c3 = false;
+        var c4 = false;
+        var c5 = false;
+        var c6 = false;
+        var c7 = false;
+        var c8 = false;
+        var c9 = false;
+        var c10 = false;
+        var c11 = false;
+        var c12 = false;
+        var c13 = false;
+        var c14 = false;
+
+        function validateQuestion1() {
+
+            var solution;
+
+            if(arguments.length != 2)
+            {
+                alert("Script Error");
+            }
+
+            var questionNumber = arguments[0];
+            var inputText = arguments[1].value;
+
+            switch(questionNumber) {
+                case 1:
+                    solution = 0;
+                    c1 = (solution == inputText);
+                    break;
+                case 2:
+                    solution = 17;
+                    c2 = (solution == inputText);
+                    break;
+                case 3:
+                    solution = 14;
+                    c3 = (solution == inputText);
+                    break;
+                case 4:
+                    solution = 0;
+                    c4 = (solution == inputText);
+                    break;
+                case 5:
+                    solution = 12;
+                    c5 = (solution == inputText);
+                    break;
+                case 6:
+                    solution = 8;
+                    c6 = (solution == inputText);
+                    break;
+                case 7:
+                    solution = 13;
+                    c7 = (solution == inputText);
+                    break;
+                case 8:
+                    solution = 13;
+                    c8 = (solution == inputText);
+                    break;
+                case 9:
+                    solution = 20;
+                    c9 = (solution == inputText);
+                    break;
+                case 10:
+                    solution = 12;
+                    c10 = (solution == inputText);
+                    break;
+                case 11:
+                    solution = 4;
+                    c11 = (solution == inputText);
+                    break;
+                case 12:
+                    solution = 17;
+                    c12 = (solution == inputText);
+                    break;
+                case 13:
+                    solution = 0;
+                    c13 = (solution == inputText);
+                    break;
+                case 14:
+                    solution = 11;
+                    c14 = (solution == inputText);
+                    break;
+                default:
+                    break;
+            }
+
+            if(inputText == solution) {
+                questionCorrect = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+        function validateAllQuestions() {
+            overallStatus = (c1 && c2 && c3 && c4 && c5 && c6 && c7 && c8 && c9 && c10 && c11 && c12 && c13
+            && c14);
+
+            if(overallStatus == true) {
+                setGenericCookie("subtractionLesson", "true", 12);
+
+                //displayGenericDialog("allCorrectDialog");
+                //alert("All questions have been answered correctly!");
+
+                /*
+                setTimeout(
+                    function()
+                    {
+                        //do something special
+                        $(location).attr('href',"index.html");
+                    }, 2500);
+                */
+            } else {
+                //Not all questions in lesson answered correctly yet!
+            }
+        }
+
+        function setGenericCookie(cname,cvalue,exdays) {
+            console.log("setting cookie " + cname + " with value " + cvalue + " for " + exdays + " days");
+
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname+"="+cvalue+"; "+expires;
+        }
+
+        function getGenericCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkGenericCookie(cname) {
+            console.log("checking cookie " + cname);
+
+            var c=getGenericCookie(cname);
+
+            if (c != "") {
+                return c;
+            } else {
+                return "";
+            }
+        }
+
+        function displayGenericDialog(divId) {
+            console.log("displaying dialog comprised of div " + divId);
+
+            $( "#" + divId ).dialog({
+                autoOpen: false
+            });
+
+            $("#" + divId).dialog('open');
+        }
+
+        function riddleSolution() {
+            if(overallStatus == true)
+            {
+                displayGenericDialog("riddleDialog");
+
+                setTimeout(
+                    function()
+                    {
+                        //do something special
+                        $(location).attr('href',"index.html");
+                    }, 2500);
+            } else {
+                displayGenericDialog("riddleDialogIncomplete");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="skel-layers-fixed">
+
+    <div class="top">
+
+        <!-- Logo/header icon -->
+        <!--<div id="logo">
+            <span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+            <h1 id="title">Small icon for header</h1>
+            <p>Short test for header icon.image</p>
+        </div>-->
+
+        <!-- Nav -->
+        <nav id="nav">
+            <!--
+                1. Hash link (scrolls to a different section within the page)
+                   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
+
+                2. Standard link (sends the user to another page/site)
+                   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
+            -->
+            <ul>
+                <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-trophy">Mission 1:</span></a></li>
+                <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-briefcase">Challenge</span></a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="bottom">
+
+        <!--
+        <!-- Social Icons
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+            <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        -->
+
+        <p align="center">
+            <a href="index.html" class="button scrolly">Back to home</a>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Intro -->
+    <section id="top" class="one dark cover">
+        <div class="container">
+
+            <header>
+                <h2 class="alt">MISSION 1:</h2>
+                <p>In this mission you will practice integer subtraction!</p>
+            </header>
+
+            <footer>
+                <a href="#portfolio" class="button scrolly">Let's get started!</a>
+            </footer>
+
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section id="contact" class="four">
+        <div class="container">
+
+            <header>
+                <h2>Challenge</h2>
+            </header>
+            <div id="riddle">
+                <p>To complete this mission, you must decode the riddle.<br>
+                    <b>TASK 1:&nbsp;</b> Find the difference of each equation.</p>
+                <table class="center" style="width:50%">
+                    <tr id="t2r1">
+                        <td>(1)</td>
+                        <td> -42 - (-42)  = </td>
+                        <form action="javascript:validateQuestion1(1, q1)">
+                            <td><input id="q1" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                        <td><input type="submit" value="Check" class="smallerInput">
+                            </form>
+                    </tr>
+                    <tr id="t2r2">
+                        <td>(2)</td>
+                        <td> 114 - 97  = </td>
+                        <form action="javascript:validateQuestion1(2, q2)">
+                            <td><input id="q2" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r3">
+                        <td>(3)</td>
+                        <td> 201 - 187  = </td>
+                        <form action="javascript:validateQuestion1(3, q3)">
+                            <td><input id="q3" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r4">
+                        <td>(4)</td>
+                        <td> 42 - 42  = </td>
+                        <form action="javascript:validateQuestion1(4, q4)">
+                            <td><input id="q4" type="text" maxlength="2" size="2" class="smallerTextBox"></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r5">
+                        <td>(5)</td>
+                        <td> 506 - 494 = </td>
+                        <form action="javascript:validateQuestion1(5, q5)">
+                            <td><input id="q5" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r6">
+                        <td>(6)</td>
+                        <td> -43 - (-51) = </td>
+                        <form action="javascript:validateQuestion1(6, q6)">
+                            <td><input id="q6" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r7">
+                        <td>(7)</td>
+                        <td> -13 - (-26) = </td>
+                        <form action="javascript:validateQuestion1(7, q7)">
+                            <td><input id="q7" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r8">
+                        <td>(8)</td>
+                        <td> -92 - (-105) = </td>
+                        <form action="javascript:validateQuestion1(8, q8)">
+                            <td><input id="q8" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r9">
+                        <td>(9)</td>
+                        <td> -220 - (-240) = </td>
+                        <form action="javascript:validateQuestion1(9, q9)">
+                            <td><input id="q9" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r10">
+                        <td>(10)</td>
+                        <td> 111 - 99 = </td>
+                        <form action="javascript:validateQuestion1(10, q10)">
+                            <td><input id="q10" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r11">
+                        <td>(11)</td>
+                        <td> -96 - (-100) = </td>
+                        <form action="javascript:validateQuestion1(11, q11)">
+                            <td><input id="q11" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r12">
+                        <td>(12)</td>
+                        <td> -97 - (-114) = </td>
+                        <form action="javascript:validateQuestion1(12, q12)">
+                            <td><input id="q12" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r13">
+                        <td>(13)</td>
+                        <td> -289 - (-289) = </td>
+                        <form action="javascript:validateQuestion1(13, q13)">
+                            <td><input id="q13" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                    <tr id="t2r14">
+                        <td>(14)</td>
+                        <td> -13 - (-24) = </td>
+                        <form action="javascript:validateQuestion1(14, q14)">
+                            <td><input id="q14" type="text" maxlength="2" size="2" class="smallerTextBox" ></td>
+                            <td><input type="submit" value="Check" class="smallerInput">
+                        </form>
+                    </tr>
+                </table>
+                <!--MODIFY: align left-->
+                <!--solution-->
+                <p>
+                    <b>TASK 2:&nbsp;</b>To solve the riddle, use the letter-number table to match each answer to a letter!<br><br>
+                    <img src="img/letterNumTable.png" alt="" width ="75%"/><br><br>
+                    <b>What do you call a number that can't keep still?</b><br>
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    &nbsp; &nbsp; &nbsp;
+
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    '
+                    &nbsp; &nbsp; &nbsp;
+
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    <input type="text" maxlength="1" size="1" class="smallerTextBox">
+                    !
+                    <input onclick="javascript:riddleSolution()" type="submit" value="Check" class="smallerInput">
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<div id="footer">
+
+    <!-- Copyright -->
+    <ul class="copyright">
+        <li>&copy; The Equation Group || Dyn Hackademy 2015. || All rights reserved.</li>
+    </ul>
+
+</div>
+
+<div id="correctDialog" title="Correct!" hidden="hidden">
+    <p align="center">Great work!
+    </p>
+</div>
+
+<div id="incorrectDialog" title="Incorrect" hidden="hidden">
+    <p align="center">Try again!
+    </p>
+</div>
+
+<div id="allCorrectDialog" title="All Correct!" hidden="hidden">
+    <p align="center">All questions have been answered successfully! Redirecting...
+    </p>
+</div>
+
+<div id="riddleDialog" title="Riddle Answer" hidden="hidden">
+    <p align="center">A roamin' numeral. All questions have been answered successfully! Redirecting...</p>
+</div>
+
+<div id="riddleDialogIncomplete" title="Riddle Answer" hidden="hidden">
+    <p align="center">The riddle is still incomplete!</p>
+</div>
+
+</body>
+</html>

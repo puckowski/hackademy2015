@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Agent Training Program -- Mission 2: Multiplication</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/jquery.scrollzer.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-wide.css" />
+    </noscript>
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+    <script>
+        var question1Correct = false;
+        var question2Correct = false;
+        var question3Correct = false;
+        var question4Correct = false;
+
+        function validateQuestion1() {
+            var inputText = document.getElementById("t1n2").value;
+
+            if(inputText == "66") {
+                question1Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+        function validateQuestion2() {
+            var inputText = document.getElementById("t1n3").value;
+
+            if(inputText == "95") {
+                question2Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+
+        function validateQuestion3() {
+            var inputText = document.getElementById("t1n4").value;
+
+            if(inputText == "460") {
+                question3Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+        function validateQuestion4() {
+            var inputText = document.getElementById("t1n5").value;
+
+            if(inputText == "-60") {
+                question4Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+        function validateAllQuestions() {
+            if(question1Correct == true && question2Correct ==true && question3Correct == true && question4Correct) {
+                setGenericCookie("multiplicationLesson", "true", 12);
+
+                displayGenericDialog("allCorrectDialog");
+                //alert("All questions have been answered correctly!");
+
+                setTimeout(
+                    function () {
+                        //do something special
+                        $(location).attr('href', "index.html");
+                    }, 2500);
+
+                //$(location).attr('href',"index.html");
+            } else {
+                //Not all questions in lesson answered correctly yet!
+            }
+        }
+
+        function setGenericCookie(cname,cvalue,exdays) {
+            console.log("setting cookie " + cname + " with value " + cvalue + " for " + exdays + " days");
+
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname+"="+cvalue+"; "+expires;
+        }
+
+        function getGenericCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkGenericCookie(cname) {
+            console.log("checking cookie " + cname);
+
+            var c=getGenericCookie(cname);
+
+            if (c != "") {
+                return c;
+            } else {
+                return "";
+            }
+        }
+
+        function displayGenericDialog(divId) {
+            console.log("displaying dialog comprised of div " + divId);
+
+            $( "#" + divId ).dialog({
+                autoOpen: false
+            });
+
+            $("#" + divId).dialog('open');
+        }
+
+    </script>
+
+
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="skel-layers-fixed">
+
+    <div class="top">
+
+        <!-- Logo/header icon -->
+        <!--<div id="logo">
+            <span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+            <h1 id="title">Small icon for header</h1>
+            <p>Short test for header icon.image</p>
+        </div>-->
+
+        <!-- Nav -->
+        <nav id="nav">
+            <!--
+                1. Hash link (scrolls to a different section within the page)
+                   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
+
+                2. Standard link (sends the user to another page/site)
+                   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
+            -->
+            <ul>
+                <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-trophy">Mission 2:</span></a></li>
+                <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-lock">Intel Report 1</span></a></li>
+                <li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-lock">Intel Report 2</span></a></li>
+                <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-briefcase">Challenges</span></a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="bottom">
+
+        <!--
+        <!-- Social Icons
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+            <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        -->
+
+        <p align="center">
+            <a href="index.html" class="button scrolly">Back to home</a>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Intro -->
+    <section id="top" class="one dark cover">
+        <div class="container">
+
+            <header>
+                <h2 class="alt">Mission 2:</h2>
+                <p>In this section, we will learn how to multiply!<br />
+                    </p>
+            </header>
+
+            <footer>
+                <a href="#portfolio" class="button scrolly">Let's Get Started!</a>
+            </footer>
+
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="two">
+        <div class="container">
+
+            <header>
+                <h2>Intel Report 1: What is Multiplication?</h2>
+            </header>
+
+            <p>Multiplication is basically addition but more simplified.
+                In multiplication, the order of the numbers do not matter.
+                <br>
+
+                <!--Include multiplication.png file here -->
+
+
+
+
+                </p>
+
+
+
+
+        <img src="img/multiplication.png" alt=""  style = "width:504px;height:250px"/>
+            </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about" class="three">
+        <div class="container">
+
+            <header>
+                <h2>Intel Report 2: The Times Table and Examples</h2>
+            </header>
+
+            <!-- Include times table picture here-->
+
+
+
+
+            <img src="img/timestable.png" alt=""  style = "width:704px;height:400px"/>
+            <!--<header> ---------------------------------------------->
+
+            <p>  Memorizing the times table shown below can be helpful when learning multiplication. <br>
+                To use the table, you take a number of the outside row and and column and after you "multiply"
+                them together, where they meet on the table is the answer.<br>
+
+                <br>
+
+                <strong>Example 1. </strong><br>
+                5 x 3 = 15 is equivalent to 3 x 5 = 15
+                <br>
+                Similarly, <br>
+                3 x 5 is the same as 3 + 3 + 3 + 3 + 3 and <br>
+                5 x 3 is the same as 5 + 5 + 5 <br>
+                <br>
+
+                <strong>Example 2. </strong><br>
+
+                10 x 5 = 50 is the same as <br> 10 + 10 + 10 + 10 + 10. <br>
+
+                <br>
+
+                You can also multiply negative numbers together as well: <br>
+                If you multiply a negative number by a positive number, the product will be <strong>negative.</strong> <br>
+                If you multiply a negative number by a negative number, the product is <strong>positive.</strong> <br>
+                <br>
+                <strong>Example 3.</strong> <br>
+
+                12 x -4 = -48 <br>
+
+                -12 x -4 = 48 <br>
+
+                <br>
+
+
+
+               </p>
+
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="four">
+        <div class="container">
+
+            <header>
+                <h2>Challenge</h2>
+            </header>
+
+
+            <p>Here are some problems that you can try on your own!</p>
+
+            <p>Please solve the multiplication problems and enter the answer in the box. Then submit your answers.</p>
+
+            <div id="example">
+                <table style="width:75%">
+                    <tr id="t1n1">
+                        <td>(1)</td>
+                        <td>11 x 6 = </td>
+                        <td><input id="t1n2" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                        <td><input onclick="javascript:validateQuestion1()" type="button" value="Check" class="smallerInput"></td>
+                    </tr>
+                    <tr>
+                        <td>(2)</td>
+                        <td> 19 x 5 = </td>
+                        <td><input id="t1n3" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                        <td><input onclick="javascript:validateQuestion2()" type="button" value="Check" class="smallerInput"></td>
+                    </tr>
+                    <td>(3)</td>
+                    <td> 46 x 10 = </td>
+                    <td><input id="t1n4" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                    <td><input onclick="javascript:validateQuestion3()" type="button" value="Check" class="smallerInput"></td>
+                    <tr>
+                        <td>(4)</td>
+                        <td> 12 x -5 = </td>
+                        <td><input id="t1n5" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                        <td><input onclick="javascript:validateQuestion4()" type="button" value="Check" class="smallerInput"></td>
+
+                    </tr>
+
+                </table>
+                </div>
+
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<div id="footer">
+
+    <!-- Copyright -->
+    <ul class="copyright">
+        <li>&copy; The Equation Group || Dyn Hackademy 2015. || All rights reserved.</li>
+    </ul>
+
+</div>
+
+<div id="correctDialog" title="Correct!" hidden="hidden">
+    <p align="center">Great work!
+    </p>
+</div>
+
+<div id="incorrectDialog" title="Incorrect" hidden="hidden">
+    <p align="center">Try again!
+    </p>
+</div>
+
+<div id="allCorrectDialog" title="All Correct!" hidden="hidden">
+    <p align="center">All questions have been answered successfully! Redirecting...
+    </p>
+</div>
+
+</body>
+</html>

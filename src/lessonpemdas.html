@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>Agent Training Program -- Mission 5: Order of Operations</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scrolly.min.js"></script>
+    <script src="js/jquery.scrollzer.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-wide.css" />
+    </noscript>
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+    <script>
+        var question1Correct = false;
+        var question2Correct = false;
+        var question3Correct = false;
+
+        function displayGenericDialog(divId) {
+            console.log("displaying dialog comprised of div " + divId);
+
+            $( "#" + divId ).dialog({
+                autoOpen: false
+            });
+
+            $("#" + divId).dialog('open');
+        }
+
+        function validateQuestion1() {
+            var inputText = document.getElementById("t1t1").value;
+
+            if(inputText == "74") {
+                question1Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+        function validateQuestion2() {
+            var inputText = document.getElementById("t1t2").value;
+
+            if(inputText == "2") {
+                question2Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+
+        function validateQuestion3() {
+            var inputText = document.getElementById("t1t3").value;
+
+            if(inputText == "76") {
+                question3Correct = true;
+
+                displayGenericDialog("correctDialog");
+                //alert("Correct!");
+            } else {
+                displayGenericDialog("incorrectDialog");
+                //alert("Incorrect!");
+            }
+
+            validateAllQuestions();
+        }
+
+
+        function validateAllQuestions() {
+            if(question1Correct == true && question2Correct ==true && question3Correct == true) {
+                setGenericCookie("pemdasLesson", "true", 12);
+
+                displayGenericDialog("allCorrectDialog");
+                //alert("All questions have been answered correctly!");
+
+                setTimeout(
+                    function () {
+                        //do something special
+                        $(location).attr('href', "index.html");
+                    }, 2500);
+
+                //$(location).attr('href',"index.html");
+            } else {
+                //Not all questions in lesson answered correctly yet!
+            }
+        }
+
+        function setGenericCookie(cname,cvalue,exdays) {
+            console.log("setting cookie " + cname + " with value " + cvalue + " for " + exdays + " days");
+
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname+"="+cvalue+"; "+expires;
+        }
+
+        function getGenericCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkGenericCookie(cname) {
+            console.log("checking cookie " + cname);
+
+            var c=getGenericCookie(cname);
+
+            if (c != "") {
+                return c;
+            } else {
+                return "";
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+<!-- Header -->
+<div id="header" class="skel-layers-fixed">
+
+    <div class="top">
+
+        <!-- Logo/header icon -->
+        <!--<div id="logo">
+            <span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
+            <h1 id="title">Small icon for header</h1>
+            <p>Short test for header icon.image</p>
+        </div>-->
+
+        <!-- Nav -->
+        <nav id="nav">
+            <!--
+                1. Hash link (scrolls to a different section within the page)
+                   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
+
+                2. Standard link (sends the user to another page/site)
+                   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
+            -->
+            <ul>
+                <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-trophy">Mission 5:</span></a></li>
+                <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-lock">Intel Report 1</span></a></li>
+                <li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-lock">Intel Report 2</span></a></li>
+                <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-briefcase">Challenges</span></a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="bottom">
+
+        <!--
+        <!-- Social Icons
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+            <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+        </ul>
+        -->
+
+        <p align="center">
+            <a href="index.html" class="button scrolly">Back to home</a>
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Intro -->
+    <section id="top" class="one dark cover">
+        <div class="container">
+
+            <header>
+                <h2 class="alt">Mission 5:</h2>
+                <p> In this section you will learn about Order of Operations!<br />
+                </p>
+            </header>
+
+            <footer>
+                <a href="#portfolio" class="button scrolly">Let's Get Started!</a>
+            </footer>
+
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="two">
+        <br class="container">
+
+        <header>
+            <h2>Intel Report 1: What are the Order of Operations?</h2>
+        </header>
+
+        If you are asked to simplify a problem such as “ 5 + 4 x 3”, how would you go about solving this? <br>
+
+        There are many ways to go about solving this, most people might solve it from left to right just like when you read from left to right.
+        But that approach is incorrect. The correct way to solve this is to use the order of operations (PEMDAS).
+
+        If you can’t remember PEMDAS, an easy way to remember the order is shown below: <br>
+        <br>
+
+        "Please Excuse My Dear Aunt Sally" <br>
+
+        <br>
+        1. <strong>P</strong>arentheses <br>
+        2. <strong>E</strong>xponents <br>
+        3. <strong>M</strong>ultiplication <br>
+        4. <strong>D</strong>ivision <br>
+        5. <strong>A</strong>ddition <br>
+        6. <strong>S</strong>ubtraction <br>
+        <br>
+        This acronym will helps to explain the order of operations. First you will compute what is inside the parentheses.
+        Then exponents come next, then multiplication and division, and then addition and subtraction. This is generally the
+        order but in some cases if division comes before multiplication you compute that first and the same goes for subtraction
+        before addition.<br>
+
+        <br>
+
+
+
+
+
+
+
+
+        <!--Include multiplication.png file here -->
+
+
+
+
+
+    </section>
+
+    <!-- Section 2 -->
+    <section id="about" class="three">
+        <div class="container">
+
+            <header>
+                <h2>Intel Report 2: Examples</h2>
+            </header>
+
+
+
+            <b>Example 1.</b> <br>
+
+            (4 x 3) + 5 <br>
+
+            First, compute what is inside the parentheses because it has the highest status. <br>
+            4 x 3 = 12 <br>
+            Then you compute the rest of the equation which is, 12 + 5 = 17. <br>
+            The final answer is 17. <br>
+
+            <br>
+
+            <b>Example 2.</b> <br>
+            (20 &divide; 4) – 3<sup>2</sup> <br>
+
+            This simplifies to: 5 - 9 = -4. <br>
+
+            <br>
+
+            <b>Example 3.</b><br>
+
+            5<sup>2</sup> x 6 – 40 + 3 = <br>
+
+            First compute the exponent part, 5<sup>2</sup> = 25. <br>
+
+            25 x 6 is the next step, the product is 150. <br>
+
+            Now, we compute 150 - 40 = 110 and add 3. The final answer is 113. <br>
+
+
+        </div>
+    </section>
+
+    <!-- Practice Problems -->
+    <section id="contact" class="four">
+        <div class="container">
+
+            <header>
+                <h2>Challenge</h2>
+            </header>
+
+            <p>Here are some problems that you can try on your own!</p>
+
+            <p>Please solve the modulo division problems and enter in the remainder in the box below. Then submit your answers.</p>
+            <!-- -->
+            <div id="example">
+                <table class="center" style="width:75%">
+                    <tr id="t1t0">
+                        <td>(1)</td>
+                        <td> 3<sup>2</sup> x 9 - (49 &divide; 7) = </td>
+                        <td><input id="t1t1" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                        <td><input onclick="javascript:validateQuestion1()" type="button" value="Check" class="smallerInput"></td>
+                    </tr>
+                    <td>(2)</td>
+                    <td> (9 + 11) &divide; 5 - 2 = </td>
+                    <td><input id="t1t2" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                    <td><input onclick="javascript:validateQuestion2()" type="button" value="Check" class="smallerInput"></td>
+                    <tr>
+                        <td>(3)</td>
+                        <td> (9<sup>2</sup>) - (7 x 10) &divide; 7 + 5  = </td>
+                        <td><input id="t1t3" type="text" maxlength="3" size="3" class="smallerTextBox"></td>
+                        <td><input onclick="javascript:validateQuestion3()" type="button" value="Check" class="smallerInput"></td>
+
+                    </tr>
+
+                </table>
+
+                <!--
+                <!--solution box for decoding activities:
+                <p id="a1">
+                    <input type="text" maxlength="2" size="2">
+                    <input type="text" maxlength="2" size="2">
+                    <input type="button" value="Check" class="smallerInput">
+                </p>
+                -->
+
+                </form>
+
+            </div>
+         </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<div id="footer">
+
+    <!-- Copyright -->
+    <ul class="copyright">
+        <li>&copy; The Equation Group || Dyn Hackademy 2015. || All rights reserved.</li>
+    </ul>
+
+</div>
+
+<div id="correctDialog" title="Correct!" hidden="hidden">
+    <p align="center">Great work!
+    </p>
+</div>
+
+<div id="incorrectDialog" title="Incorrect" hidden="hidden">
+    <p align="center">Try again!
+    </p>
+</div>
+
+<div id="allCorrectDialog" title="All Correct!" hidden="hidden">
+    <p align="center">All questions have been answered successfully! Redirecting...
+    </p>
+</div>
+
+</body>
+</html>
